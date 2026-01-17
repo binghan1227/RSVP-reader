@@ -180,20 +180,29 @@
   </div>
 
   <div class="demo-section">
-    <h2>Sentence Playback</h2>
-    <div class="controls">
-      <input type="text" id="sentence-input"
-             value="The quick brown fox jumps over the lazy dog."
-             placeholder="Enter a sentence">
-      <button onclick="playSentence()">Play</button>
-      <button class="secondary" onclick="stopPlayback()">Stop</button>
+    <h2>Text Input & Playback Controls</h2>
+    <div class="row">
+      <label for="textInput">Text Input</label>
+      <textarea id="textInput" rows="5" placeholder="Enter text here or upload a .txt file...">The quick brown fox jumps over the lazy dog.</textarea>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+      <label for="fileInput">Or Upload TXT File</label>
+      <input type="file" id="fileInput" accept=".txt,text/*" style="margin-top: 5px;">
     </div>
     <div class="playback-controls">
       <label>
-        Speed:
-        <input type="range" id="wpm-slider" min="100" max="800" value="300">
-        <span id="wpm-value">300 WPM</span>
+        Speed (ms per word):
+        <input type="range" id="speedSlider" min="200" max="800" step="50" value="400">
+        <span id="speedValue">400</span> ms
       </label>
+    </div>
+    <div class="controls" style="margin-top: 15px;">
+      <button id="startBtn">Start</button>
+      <button id="pauseBtn" class="secondary">Pause</button>
+      <button id="replayBtn" class="secondary">Replay</button>
+    </div>
+    <div class="status" style="margin-top: 15px; padding: 10px; background: #f0f0f0; border-radius: 4px; font-size: 13px;">
+      <span style="font-weight: 600; color: #333;">Status:</span> <span id="statusText">idle</span>
     </div>
   </div>
 
