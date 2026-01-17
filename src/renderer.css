@@ -1,0 +1,59 @@
+/**
+ * RSVP Renderer Styles
+ * Provides stable word positioning with ORP anchored at center
+ */
+
+.rsvp-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  user-select: none;
+}
+
+.rsvp-before {
+  flex: 1;
+  text-align: right;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rsvp-orp {
+  flex: 0 0 auto;
+  text-align: center;
+  font-weight: bold;
+}
+
+.rsvp-after {
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Optional: Add a visual guide line for the ORP position */
+.rsvp-container.show-guide {
+  position: relative;
+}
+
+.rsvp-container.show-guide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: rgba(128, 128, 128, 0.3);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Focus indicator styling */
+.rsvp-container:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 4px;
+}
