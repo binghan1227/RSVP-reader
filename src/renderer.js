@@ -2,6 +2,15 @@
  * RSVPRenderer - Rapid Serial Visual Presentation renderer
  * Displays words with ORP (Optimal Recognition Point) highlighting
  */
+
+const FUNCTION_WORDS = new Set([
+  'a', 'an', 'the',
+  'and', 'but', 'or', 'nor', 'for', 'yet', 'so',
+  'to', 'of', 'in', 'on', 'at', 'by', 'up',
+  'i', 'he', 'we', 'it',
+  'is', 'am', 'be', 'do', 'as'
+]);
+
 class RSVPRenderer {
   /**
    * @param {HTMLElement} containerElement - The container element to render into
@@ -47,7 +56,12 @@ class RSVPRenderer {
    * @returns {number} The index of the ORP character
    */
   _getORPIndex(word) {
-    const len = word.length;
+    let len = word.length;
+
+    if (FUNCTION_WORDS.has(word.toLowerCase())) {
+      len = Math.max(len, 4);
+    }
+
     if (len <= 3) return 0;      // 1st letter (index 0)
     if (len <= 5) return 1;      // 2nd letter (index 1)
     if (len <= 9) return 2;      // 3rd letter (index 2)
