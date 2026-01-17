@@ -2,24 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>RSVP Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSVP Reader</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h3>RSVP Reader</h3>
-  <div id="display">Ready</div>
-  <textarea id="textInput" rows="4">This is a simple RSVP demo.</textarea>
-  <button id="startBtn">Start</button>
-  <button id="pauseBtn">Pause</button>
-  <button id="replayBtn">Replay</button>
+  <div class="container">
+    <h3>RSVP Reader</h3>
+    
+    <div class="display-section">
+      <div id="rsvp-display" class="show-guide"></div>
+      <div id="word-info" class="word-info"></div>
+    </div>
 
-  <label>
-    Speed (ms):
-    <input type="range" id="speedSlider" min="200" max="800" value="400" step="50">
-    <span id="speedValue">400</span>
-  </label>
+    <div class="input-section">
+      <label for="textInput">Text Input</label>
+      <textarea id="textInput" rows="4" placeholder="Enter text here or upload a .txt file...">The quick brown fox jumps over the lazy dog.</textarea>
+    </div>
 
+    <div class="file-section">
+      <label for="fileInput">Upload TXT File</label>
+      <input type="file" id="fileInput" accept=".txt,text/*">
+    </div>
 
+    <div class="speed-section">
+      <label>
+        Speed (WPM):
+        <div class="speed-control">
+          <input type="range" id="speedSlider" min="100" max="900" step="50" value="300">
+          <span id="speedValue">300</span> WPM
+        </div>
+      </label>
+    </div>
+
+    <div class="controls-section">
+      <button id="startBtn">Start</button>
+      <button id="pauseBtn" class="secondary">Pause</button>
+      <button id="replayBtn" class="secondary">Replay</button>
+    </div>
+
+    <div class="status-section">
+      <span class="status-label">Status:</span>
+      <span id="statusText">idle</span>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
