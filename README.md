@@ -34,7 +34,7 @@ RSVP-reader-render/
 ### 1. Download or Clone
 
 ```bash
-git clone https://github.com/your-username/RSVP-reader-render.git
+git clone https://github.com/binghan1227/RSVP-reader-render.git
 ```
 
 ### 2. Run the Demo
