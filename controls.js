@@ -1,36 +1,108 @@
 console.log("Controls loaded");
 
 /* ======================
+   RSVP Renderer Initialization
+====================== */
+
+const displayContainer = document.getElementById("rsvp-display");
+const renderer = new RSVPRenderer(displayContainer, {
+  highlightColor: '#ff6b6b',
+  fontSize: '48px'
+});
+
+/* ======================
    Player State
 ====================== */
 
 let playerState = "idle";
-// possible: idle | playing | paused
+// possible: idle | playing | paused | finished
 
 /* ======================
-   Fake Engine (stub)
-   later replaced by real engine
+   Playback Engine
 ====================== */
 
 const engine = {
+  words: [],
+  currentIndex: 0,
+  intervalId: null,
+  speed: 400,
+
+  loadText(words) {
+    this.words = words;
+    this.currentIndex = 0;
+    console.log("ENGINE → text loaded:", words);
+    if (words.length > 0) {
+      renderer.clear();
+    }
+  },
+
+  setSpeed(ms) {
+    this.speed = ms;
+    console.log("ENGINE → speed set to", ms);
+    
+    // If currently playing, restart the interval with new speed
+    if (playerState === "playing" && this.intervalId !== null) {
+      this._stopInterval();
+      this._startInterval();
+    }
+  },
+
   start() {
-    console.log("ENGINE → start");
+    if (this.words.length === 0) {
+      console.log("ENGINE → no text loaded");
+      return;
+    }
+
+    // If already at the end, don't start
+    if (this.currentIndex >= this.words.length) {
+      console.log("ENGINE → already finished");
+      return;
+    }
+
+    console.log("ENGINE → start from index", this.currentIndex);
+    this._startInterval();
   },
 
   pause() {
-    console.log("ENGINE → pause");
+    console.log("ENGINE → pause at index", this.currentIndex);
+    this._stopInterval();
   },
 
   reset() {
     console.log("ENGINE → reset");
+    this._stopInterval();
+    this.currentIndex = 0;
+    renderer.clear();
   },
 
-  setSpeed(ms) {
-    console.log("ENGINE → speed set to", ms);
+  _startInterval() {
+    // Clear any existing interval
+    this._stopInterval();
+
+    // Show current word immediately
+    if (this.currentIndex < this.words.length) {
+      renderer.render(this.words[this.currentIndex]);
+    }
+
+    // Set up interval for next words
+    this.intervalId = setInterval(() => {
+      this.currentIndex++;
+      
+      if (this.currentIndex >= this.words.length) {
+        // Playback finished
+        this._stopInterval();
+        setState("finished");
+      } else {
+        renderer.render(this.words[this.currentIndex]);
+      }
+    }, this.speed);
   },
 
-  loadText(words) {
-    console.log("ENGINE → text loaded:", words);
+  _stopInterval() {
+    if (this.intervalId !== null) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
   }
 };
 
@@ -58,6 +130,13 @@ function parseText(text) {
 function setState(newState) {
   playerState = newState;
   console.log("STATE →", playerState);
+  
+  // Update button states based on player state
+  if (newState === "playing") {
+    pauseBtn.disabled = false;
+  } else {
+    pauseBtn.disabled = true;
+  }
 }
 
 /* ======================
@@ -66,6 +145,11 @@ function setState(newState) {
 
 startBtn.onclick = () => {
   if (playerState === "playing") return;
+
+  // If finished, reset first
+  if (playerState === "finished") {
+    engine.reset();
+  }
 
   engine.start();
   setState("playing");
@@ -105,3 +189,9 @@ textInput.onchange = () => {
   engine.loadText(words);
   setState("idle");
 };
+
+// Initialize with default text and speed
+const initialWords = parseText(textInput.value);
+engine.loadText(initialWords);
+engine.setSpeed(Number(speedSlider.value));
+setState("idle");
