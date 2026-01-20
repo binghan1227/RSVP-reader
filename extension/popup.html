@@ -2,24 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>RSVP Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSVP Reader</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="renderer.css" />
 </head>
 <body>
-  <h3>RSVP Reader</h3>
-  <div id="display">Ready</div>
-  <textarea id="textInput" rows="4">This is a simple RSVP demo.</textarea>
-  <button id="startBtn">Start</button>
-  <button id="pauseBtn">Pause</button>
-  <button id="replayBtn">Replay</button>
 
-  <label>
-    Speed (ms):
-    <input type="range" id="speedSlider" min="200" max="800" value="400" step="50">
-    <span id="speedValue">400</span>
-  </label>
+  <div class="container">
+    <h2>RSVP Reader</h2>
 
+    <div class="section">
+      <span class="section-title">Display</span>
+      <div id="rsvp-display" class="show-guide"></div>
+    </div>
 
-  <script src="popup.js"></script>
+    <div class="section">
+      <div class="input-group">
+        <label for="textInput" class="section-title">Text Input</label>
+        <textarea id="textInput" rows="4" placeholder="Enter or paste your text here...">The quick brown fox jumps over the lazy dog.</textarea>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="input-group">
+        <label for="fileInput" class="section-title">Upload TXT File</label>
+        <input type="file" id="fileInput" accept=".txt,text/*">
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="speed-control">
+        <label for="speedSlider">Speed</label>
+        <input
+          type="range"
+          id="speedSlider"
+          min="100"
+          max="900"
+          step="50"
+          value="300"
+        />
+        <div class="speed-value">
+          <span id="speedValue">300</span> <span class="speed-unit">WPM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="button-group icon-buttons">
+        <button id="startBtn" aria-label="Start" title="Start">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <button id="pauseBtn" disabled aria-label="Pause" title="Pause">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        </button>
+        <button id="replayBtn" aria-label="Replay" title="Replay">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="renderer.js"></script>
+  <script src="utils.js"></script>
+  <script src="playback-engine.js"></script>
+  <script src="controller.js"></script>
+  <script src="popup-init.js"></script>
 </body>
 </html>

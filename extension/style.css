@@ -1,33 +1,98 @@
-body {
-    font-family: Arial, sans-serif;
-    width: 300px;
-    padding: 10px;
+/**
+ * RSVP Reader Extension - Style Overrides
+ * Compact sizing for browser extension popup
+ * Base styles are in styles.css (copied from src/styles.css during build)
+ */
+
+@import url('styles.css');
+
+:root {
+  --body-padding: 12px;
+  --body-width: 380px;
+  --body-min-height: 100%;
+
+  --container-padding: 20px;
+  --container-border-radius: 12px;
+  --container-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+  --h2-margin-bottom: 20px;
+  --h2-font-size: 20px;
+
+  --section-margin-bottom: 16px;
+  --section-title-font-size: 11px;
+  --section-title-margin-bottom: 8px;
+
+  --display-height: 60px;
+  --display-font-size: 32px;
+  --display-border-radius: 6px;
+
+  --input-group-margin-bottom: 0;
+  --label-margin-bottom: 6px;
+  --label-font-size: 12px;
+
+  --textarea-font-size: 13px;
+  --textarea-padding: 10px;
+  --textarea-border-radius: 6px;
+  --textarea-line-height: 1.4;
+  --textarea-min-height: 70px;
+
+  --file-font-size: 12px;
+  --file-padding: 10px;
+  --file-border-radius: 6px;
+
+  --speed-control-gap: 10px;
+  --speed-control-padding: 12px;
+  --speed-control-border-radius: 6px;
+  --speed-control-label-min-width: 45px;
+  --speed-control-label-font-size: 12px;
+
+  --range-height: 5px;
+  --slider-thumb-size: 16px;
+
+  --speed-value-min-width: 55px;
+  --speed-value-font-size: 14px;
+  --speed-value-padding: 6px 8px;
+  --speed-value-border-radius: 4px;
+  --speed-unit-font-size: 10px;
+
+  --button-padding: 10px 16px;
+  --button-font-size: 13px;
+  --button-border-radius: 6px;
+  --button-min-width: auto;
+  --button-group-gap: 8px;
+  --button-hover-transform: translateY(-1px);
+  --button-letter-spacing: 0.3px;
+}
+
+/* Extension-specific RSVP renderer overrides */
+.rsvp-container {
+  max-width: none;
+  font-size: 32px !important;
+}
+
+/* Icon-only button styling */
+.button-group.icon-buttons {
+  justify-content: center;
+}
+
+.button-group.icon-buttons button {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.button-group.icon-buttons button svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.button-group {
+  flex-direction: row;
+}
   }
-  
-  #display {
-    height: 50px;
-    margin-bottom: 10px;
-    font-size: 24px;
-    text-align: center;
-    line-height: 50px;
-    border: 1px solid #ccc;
-  }
-  
-  textarea {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    margin-right: 5px;
-  }
-  
-  label {
-    display: block;
-    margin-top: 10px;
-  }
-  
-  #speedSlider {
-    width: 100%;
-  }
-  

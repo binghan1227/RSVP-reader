@@ -1,10 +1,13 @@
 /**
  * RSVPRenderer - Rapid Serial Visual Presentation renderer
  * Displays words with ORP (Optimal Recognition Point) highlighting
+ * 
+ * SOURCE OF TRUTH: This is the master file.
+ * extension/renderer.js should be kept in sync with this file.
  */
 
 const FUNCTION_WORDS = new Set([
-  'a', 'an', 'the',
+  'an', 'the',
   'and', 'but', 'or', 'nor', 'for', 'yet', 'so',
   'to', 'of', 'in', 'on', 'at', 'by', 'up',
   'i', 'he', 'we', 'it',

@@ -2,62 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RSVP Controls Demo</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      max-width: 600px;
-    }
-
-    textarea {
-      width: 100%;
-      font-size: 14px;
-    }
-
-    button {
-      margin-right: 10px;
-      padding: 6px 12px;
-      font-size: 14px;
-    }
-
-    .row {
-      margin-top: 20px;
-    }
-  </style>
+  <link rel="stylesheet" href="src/styles.css">
+  <link rel="stylesheet" href="src/renderer.css">
 </head>
 <body>
 
-  <h2>RSVP Controls Demo</h2>
+  <div class="container">
+    <h2>RSVP Reader</h2>
 
-  <div class="row">
-    <label for="textInput">Text Input</label><br>
-    <textarea id="textInput" rows="5">
-This is a simple RSVP demo text for testing controls.
-    </textarea>
-  </div>
+    <div class="section">
+      <span class="section-title">Display</span>
+      <div id="rsvp-display" class="show-guide"></div>
+    </div>
 
-  <div class="row">
-    <label>
-        Speed (ms):
+    <div class="section">
+      <div class="input-group">
+        <label for="textInput" class="section-title">Text Input</label>
+        <textarea id="textInput" rows="6" placeholder="Enter or paste your text here...">This is a simple RSVP demo text for testing controls.</textarea>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="input-group">
+        <label for="fileInput" class="section-title">Upload TXT File</label>
+        <input type="file" id="fileInput" accept=".txt,text/*">
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="speed-control">
+        <label for="speedSlider">Speed</label>
         <input
           type="range"
           id="speedSlider"
-          min="200"
-          max="800"
+          min="100"
+          max="900"
           step="50"
-          value="400"
+          value="300"
         />
-        <strong><span id="speedValue">400</span></strong>
-      </label>
+        <div class="speed-value">
+          <span id="speedValue">300</span> <span class="speed-unit">WPM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="button-group">
+        <button id="startBtn">Start</button>
+        <button id="pauseBtn" disabled>Pause</button>
+        <button id="replayBtn">Replay</button>
+      </div>
+    </div>
+
   </div>
 
-  <div class="row">
-    <button id="startBtn">Start</button>
-    <button id="pauseBtn">Pause</button>
-    <button id="replayBtn">Replay</button>
-  </div>
-
-  <script src="controls.js"></script>
+  <script src="src/renderer.js"></script>
+  <script src="src/utils.js"></script>
+  <script src="src/playback-engine.js"></script>
+  <script src="src/controller.js"></script>
+  <script>
+    initRSVPController({
+      fontSize: '48px'
+    });
+  </script>
 </body>
 </html>
