@@ -91,3 +91,8 @@
   height: 20px;
   flex-shrink: 0;
 }
+
+.button-group {
+  flex-direction: row;
+}
+  }
