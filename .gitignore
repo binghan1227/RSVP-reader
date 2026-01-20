@@ -1,0 +1,7 @@
+extension/renderer.js
+extension/playback-engine.js
+extension/utils.js
+extension/renderer.css
+
+*.crx
+*.pem
