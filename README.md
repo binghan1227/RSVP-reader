@@ -40,15 +40,26 @@ This separation ensures the engine is reusable, testable, and suitable for resea
 ```
 RSVP-reader/
 ├── src/
-│   ├── engine/
-│   │   └── RSVPController.js   # Core RSVP logic
-│   ├── ui/
-│   │   └── ReaderView.js       # UI layer
-│   └── index.js
-├── demo/
-│   └── demo.html
+│   ├── controller.js
+│   ├── playback-engine.js
+│   ├── renderer.css
+│   ├── styles.css
+│   ├── utils.js
+├── scripts/
+│   ├── build-extension.sh
+├── extension/
+│   ├── manifest.json
+│   ├── popup-init.js
+│   ├── popup.html
+│   ├── style.css
+├── .github/workflows
+│   ├── build-extension.yml
+├── index.html
+├── .gitignore
+├── LICENSE
 ├── README.md
-└── DEMO_INSTRUCTIONS.md
+└── demo_instructions.md
+
 ```
 
 > File names may vary slightly depending on implementation.
