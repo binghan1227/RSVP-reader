@@ -1,76 +1,125 @@
-# RSVP Reader Renderer
+# RSVP Reader
 
-A lightweight **Rapid Serial Visual Presentation (RSVP)** renderer for fast reading applications.  
-This project provides a simple, browser-based implementation for rendering text **word by word** with **Optimal Recognition Point (ORP)** highlighting, suitable for speed reading research, demos, and prototyping.
+A lightweight RSVP (Rapid Serial Visual Presentation) reader designed for real-scene reading experiments and speed-reading research.
+
+This project emphasizes **clear state management, precise timing control, and logical correctness**, rather than complex UI design.
 
 ---
 
 ## ✨ Features
 
-- Word-by-word RSVP text rendering  
-- Automatic ORP (Optimal Recognition Point) calculation and highlighting  
-- Customizable font size and highlight color  
-- Pure JavaScript implementation, no external dependencies  
-- Runs directly in the browser without a build step  
+- Word-by-word RSVP playback
+- Adjustable reading speed (200–800 ms per word)
+- Explicit playback state machine:
+  - `idle`
+  - `playing`
+  - `paused`
+  - `finished`
+- Clean separation between core logic and UI
+- Easy to extend for academic experiments
+
+---
+
+## 🧠 Core Architecture
+
+### RSVP Engine (Logic Layer)
+
+Responsible for:
+
+- Playback state transitions
+- Word index management
+- Timing and interval control
+- Speed adjustment
+
+This separation ensures the engine is reusable, testable, and suitable for research-oriented development.
 
 ---
 
 ## 📂 Project Structure
 
 ```
-RSVP-reader-render/
+RSVP-reader/
+├── src/
+│   ├── controller.js
+│   ├── playback-engine.js
+│   ├── renderer.css
+│   ├── styles.css
+│   ├── utils.js
+├── scripts/
+│   ├── build-extension.sh
+├── extension/
+│   ├── manifest.json
+│   ├── popup-init.js
+│   ├── popup.html
+│   ├── style.css
+├── .github/workflows
+│   ├── build-extension.yml
+├── index.html
+├── .gitignore
 ├── LICENSE
 ├── README.md
-├── demo.html
-└── src/
-    ├── renderer.js
-    └── renderer.css
+└── demo_instructions.md
+
 ```
+
+> File names may vary slightly depending on implementation.
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Download or Clone
+### Clone the Repository
 
 ```bash
-git clone https://github.com/binghan1227/RSVP-reader-render.git
+git clone https://github.com/binghan1227/RSVP-reader.git
+cd RSVP-reader
 ```
 
-### 2. Run the Demo
+### Run the Demo
 
-Open `demo.html` directly in your browser.  
-No server or additional setup is required.
+### Option 1: Run via Extension (Recommended)
+
+1. First, execute the build script to generate the extension package:
+   
+   ```bash
+   ./scripts/build-extension.sh
+   
+2. Open Chrome and navigate to the extension management page:
+   chrome://extensions/
+   
+3. Enable Developer mode (toggle in the top-right corner).
+4. Drag the generated ZIP file from the Build folder into the extension page to load it.
+
+### Option 2: Run via HTML File
+
+Open the following file directly in a modern browser:
+
+```index.html```
+
+No build step or server is required.
+---
+
+## 🔧 Customization
+
+- Modify reading speed in the RSVP controller
+- Replace text input for different experiments
+- Extend the state machine to support:
+  - backward navigation
+  - adaptive speed control
+  - eye-tracking or AI-based input (future work)
 
 ---
 
-## 🧠 Basic Usage
+## 🎓 Intended Use
 
-```html
-<div id="rsvp"></div>
-
-<script src="src/renderer.js"></script>
-<script>
-  const container = document.getElementById('rsvp');
-
-  const renderer = new RSVPRenderer(container, {
-    highlightColor: '#ff0000',
-    fontSize: '48px'
-  });
-
-  renderer.renderWord("reading");
-</script>
-```
+- Speed-reading experiments
+- Cognitive science / HCI coursework
+- RSVP-based UI prototyping
+- Teaching examples for state machines and timing logic
 
 ---
 
-## 📖 About ORP (Optimal Recognition Point)
+## 📌 License
 
-The **Optimal Recognition Point (ORP)** is the position in a word where readers naturally focus their gaze during reading.  
-Highlighting this point helps reduce eye movement and improve reading efficiency.
+MIT License (or specify your own license).
 
----
-
-## 📄 License
-
-See the LICENSE file for details.
