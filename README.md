@@ -91,6 +91,7 @@ cd RSVP-reader
 4. Drag the generated ZIP file from the Build folder into the extension page to load it.
 
 ### Option 2: Run via HTML File
+
 Open the following file directly in a modern browser:
 
 ```index.html
